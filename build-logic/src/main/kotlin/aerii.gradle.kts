@@ -62,6 +62,9 @@ repositories {
 
     strictMaven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1", "me.djtheredstoner")
     strictMaven("https://maven.parchmentmc.org/", "org.parchmentmc")
+
+    maven("https://maven.starred.foo/releases")
+    maven("https://maven.starred.foo/snapshots")
 }
 
 fletchingTable {

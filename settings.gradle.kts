@@ -15,9 +15,8 @@ plugins {
 }
 
 stonecutter.create(rootProject) {
-    version("1.21.10").buildscript = "build.obf.gradle.kts"
     version("1.21.11").buildscript = "build.obf.gradle.kts"
-    version("26.1").buildscript = "build.gradle.kts"
+    versions("26.1", "26.2").buildscript = "build.gradle.kts"
 
-    vcsVersion = "1.21.10"
+    vcsVersion = "1.21.11"
 }

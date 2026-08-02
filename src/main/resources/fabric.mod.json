@@ -12,7 +12,7 @@
   "entrypoints": {
     "client": [
       {
-        "value": "xyz.aerii.template.Template",
+        "value": "foo.starred.template.Template",
         "adapter": "kotlin"
       }
     ]

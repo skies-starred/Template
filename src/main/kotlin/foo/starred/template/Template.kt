@@ -1,6 +1,6 @@
 @file:Suppress("ConstPropertyName")
 
-package xyz.aerii.template
+package foo.starred.template
 
 import net.fabricmc.api.ClientModInitializer
 import org.apache.logging.log4j.LogManager

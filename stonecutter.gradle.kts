@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.loom.obf) apply false
 }
 
-stonecutter active "1.21.10"
+stonecutter active "1.21.11"
 
 stonecutter parameters {
     swaps["mod_version"] = "\"" + property("mod.version") + "\""
@@ -13,10 +13,6 @@ stonecutter parameters {
     swaps["minecraft"] = "\"" + node.metadata.version + "\""
 
     replacements {
-        string(current.parsed >= "1.21.11") {
-            replace("ResourceLocation", "Identifier")
-        }
-
         string(current.parsed >= "26.1") {
             replace("ClientCommandManager", "ClientCommands")
             replace("GuiGraphics", "GuiGraphicsExtractor")

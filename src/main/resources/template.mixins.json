@@ -1,6 +1,6 @@
 {
   "required": false,
-  "package": "xyz.aerii.template.mixin",
+  "package": "foo.starred.template.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
   "injectors": {
