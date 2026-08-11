@@ -84,6 +84,9 @@ dependencies {
     impl("fabric-loader".global)
     impl("fabric-language-kotlin".global)
 
+    shadow("snowbird".versioned)
+    shadow("cascade".versioned)
+
     if (new) return@dependencies
     "mappings"(loom.layered {
         officialMojangMappings()

@@ -13,6 +13,14 @@ fabric-api-1-21-11 = "0.140.2+1.21.11"
 fabric-api-26-1 = "0.144.0+26.1"
 fabric-api-26-2 = "0.154.0+26.2"
 
+snowbird-1-21-11 = "012+1.21.11"
+snowbird-26-1 = "012+26.1"
+snowbird-26-2 = "012+26.2"
+
+cascade-1-21-11 = "011+1.21.11"
+cascade-26-1 = "011+26.1"
+cascade-26-2 = "011+26.2"
+
 parchment-1-21-11 = "2025.12.20"
 
 [libraries]
@@ -24,6 +32,14 @@ devauth = { module = "me.djtheredstoner:DevAuth-fabric", version.ref = "devauth"
 fabric-api-1-21-11 = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api-1-21-11" }
 fabric-api-26-1 = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api-26-1" }
 fabric-api-26-2 = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api-26-2" }
+
+snowbird-1-21-11 = { module = "foo.starred:snowbird", version.ref = "snowbird-1-21-11" }
+snowbird-26-1 = { module = "foo.starred:snowbird", version.ref = "snowbird-26-1" }
+snowbird-26-2 = { module = "foo.starred:snowbird", version.ref = "snowbird-26-2" }
+
+cascade-1-21-11 = { module = "foo.starred:cascade", version.ref = "cascade-1-21-11" }
+cascade-26-1 = { module = "foo.starred:cascade", version.ref = "cascade-26-1" }
+cascade-26-2 = { module = "foo.starred:cascade", version.ref = "cascade-26-2" }
 
 parchment-1-21-11 = { module = "org.parchmentmc.data:parchment-1.21.11", version.ref = "parchment-1-21-11" }
 
