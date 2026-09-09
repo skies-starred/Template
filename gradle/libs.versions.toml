@@ -1,51 +1,44 @@
 [versions]
-loom = "1.15-SNAPSHOT"
-fletchingTable = "0.1.0-alpha.22"
-ksp = "2.3.0"
-kotlin = "2.3.0"
+loom = "1.17-SNAPSHOT"
+kotlin = "2.4.10"
 
 devauth = "1.2.2"
+kommand = "1.0.2"
 
-fabric-loader = "0.18.4"
-fabric-language-kotlin = "1.13.8+kotlin.2.3.0"
+fabric-loader = "0.19.3"
+fabric-language-kotlin = "1.13.13+kotlin.2.4.10"
 
-fabric-api-1-21-11 = "0.140.2+1.21.11"
-fabric-api-26-1 = "0.144.0+26.1"
-fabric-api-26-2 = "0.154.0+26.2"
+fabric-api-26-1 = "0.155.2+26.1.2"
+fabric-api-26-2 = "0.158.0+26.2"
 
-snowbird-1-21-11 = "012+1.21.11"
-snowbird-26-1 = "012+26.1"
-snowbird-26-2 = "012+26.2"
+snowbird-26-1 = "021+26.1"
+snowbird-26-2 = "021+26.2"
 
-cascade-1-21-11 = "011+1.21.11"
-cascade-26-1 = "011+26.1"
-cascade-26-2 = "011+26.2"
+cascade-26-1 = "036+26.1"
+cascade-26-2 = "036+26.2"
 
-parchment-1-21-11 = "2025.12.20"
+updater-26-1 = "1.0.4+26.1"
+updater-26-2 = "1.0.4+26.2"
 
 [libraries]
 fabric-loader = { module = "net.fabricmc:fabric-loader", version.ref = "fabric-loader" }
 fabric-language-kotlin = { module = "net.fabricmc:fabric-language-kotlin", version.ref = "fabric-language-kotlin" }
 
 devauth = { module = "me.djtheredstoner:DevAuth-fabric", version.ref = "devauth" }
+kommand = { module = "foo.starred:kommand", version.ref = "kommand" }
 
-fabric-api-1-21-11 = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api-1-21-11" }
 fabric-api-26-1 = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api-26-1" }
 fabric-api-26-2 = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabric-api-26-2" }
 
-snowbird-1-21-11 = { module = "foo.starred:snowbird", version.ref = "snowbird-1-21-11" }
 snowbird-26-1 = { module = "foo.starred:snowbird", version.ref = "snowbird-26-1" }
 snowbird-26-2 = { module = "foo.starred:snowbird", version.ref = "snowbird-26-2" }
 
-cascade-1-21-11 = { module = "foo.starred:cascade", version.ref = "cascade-1-21-11" }
 cascade-26-1 = { module = "foo.starred:cascade", version.ref = "cascade-26-1" }
 cascade-26-2 = { module = "foo.starred:cascade", version.ref = "cascade-26-2" }
 
-parchment-1-21-11 = { module = "org.parchmentmc.data:parchment-1.21.11", version.ref = "parchment-1-21-11" }
+updater-26-1 = { module = "foo.starred:updater", version.ref = "updater-26-1" }
+updater-26-2 = { module = "foo.starred:updater", version.ref = "updater-26-2" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-loom-obf = { id = "fabric-loom", version.ref = "loom" }
 loom = { id = "net.fabricmc.fabric-loom", version.ref = "loom" }
-fletchingTable = { id = "dev.kikugie.fletching-table.fabric", version.ref = "fletchingTable" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

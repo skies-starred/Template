@@ -2,6 +2,7 @@
   "required": false,
   "package": "foo.starred.template.mixin",
   "compatibilityLevel": "JAVA_21",
+  "plugin": "foo.starred.template.mixin.loader.TemplateModMixinLoaderPlugin",
   "mixins": [],
   "injectors": {
     "defaultRequire": 1

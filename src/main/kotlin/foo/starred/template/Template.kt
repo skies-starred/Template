@@ -16,6 +16,5 @@ object Template : ClientModInitializer {
 
     override fun onInitializeClient() {
         LOGGER.info("Template mod initialised.")
-        LOGGER.info("Mixins are automatically loaded, you don't need to add them to the mixins.json file!")
     }
 }
