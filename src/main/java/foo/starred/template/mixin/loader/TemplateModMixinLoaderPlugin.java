@@ -16,10 +16,12 @@ import java.util.TreeSet;
 
 public class TemplateModMixinLoaderPlugin implements IMixinConfigPlugin {
     private String pack = "foo.starred.template.mixin";
+    private String self;
 
     @Override
     public void onLoad(String mixinPackage) {
         this.pack = mixinPackage;
+        this.self = getClass().getSimpleName() + ".class";
     }
 
     @Override
@@ -73,7 +75,8 @@ public class TemplateModMixinLoaderPlugin implements IMixinConfigPlugin {
 
             while (entries.hasMoreElements()) {
                 var name = entries.nextElement().getName();
-                if (!name.startsWith(path + "/") || !mixin(name)) continue;
+                if (!name.startsWith(path + "/")) continue;
+                if (!mixin(name)) continue;
 
                 mixins.add(name.substring(path.length() + 1, name.length() - 6).replace('/', '.'));
             }
@@ -85,13 +88,13 @@ public class TemplateModMixinLoaderPlugin implements IMixinConfigPlugin {
     }
 
     private boolean mixin(String path) {
-        return path.endsWith(".class") && !path.contains("$") && !path.endsWith("TemplateModMixinLoaderPlugin.class") && loaded(path);
-    }
+        if (!path.endsWith(".class")) return false;
+        if (path.contains("$")) return false;
+        if (path.endsWith(self)) return false;
 
-    private boolean loaded(String path) {
-        String s = path.replace('\\', '/').replace('.', '/');
-        int i = s.indexOf("compat/");
-        return i == -1 || FabricLoader.getInstance().isModLoaded(s.substring(i + 7).split("/")[0]);
+        var str = path.replace('\\', '/').replace('.', '/');
+        var i = str.indexOf("compat/");
+        return i == -1 || FabricLoader.getInstance().isModLoaded(str.substring(i + 7).split("/")[0]);
     }
 
     @Override
