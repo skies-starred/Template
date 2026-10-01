@@ -3,18 +3,20 @@
 package foo.starred.template
 
 import net.fabricmc.api.ClientModInitializer
-import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 object Template : ClientModInitializer {
-    const val modVersion: String = /*$ mod_version*/ "0.0.1"
-    const val modId: String = /*$ mod_id*/ "template"
-    const val modName: String = /*$ mod_name*/ "Template"
-
     @JvmField
-    val LOGGER: Logger = LogManager.getLogger(Template::class.java)
+    val LOGGER: Logger = LoggerFactory.getLogger(Data.name)
 
     override fun onInitializeClient() {
         LOGGER.info("Template mod initialised.")
+    }
+
+    object Data {
+        const val version: String = /*$ mod_version*/ "0.0.1"
+        const val name: String = /*$ mod_name*/ "Template"
+        const val id: String = /*$ mod_id*/ "template"
     }
 }

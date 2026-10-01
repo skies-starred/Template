@@ -1,18 +1,17 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.loom)
     `maven-publish`
 }
 
-val ver = stonecutter.current.version
-val modId = project.property("mod.id").toString()
-val modName = project.property("mod.name").toString()
-val modVer = project.property("mod.version").toString()
+val catalogs = extensions.getByType<VersionCatalogsExtension>()
+val minecraft = stonecutter.current.version
+val lib = catalogs.named("libs${minecraft.replace(".", "")}")
+val mod = catalogs.named("mod")
 
-version = "$modVer+$ver"
-base.archivesName = modId
+version = "${mod("version")}+$minecraft"
+group = mod("group")
+base.archivesName = mod("id")
 
 repositories {
     maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
@@ -21,32 +20,28 @@ repositories {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:$ver")
+    minecraft(lib["minecraft"])
 
-    localRuntime("devauth".global)
+    localRuntime(libs.devauth)
 
-    implementation("fabric-loader".global)
-    implementation("fabric-language-kotlin".global)
-    implementation("fabric-api".versioned)
+    implementation(lib["fabric-api"])
+    implementation(libs.fabric.loader)
+    implementation(libs.fabric.language.kotlin)
 
-    shadow("kommand".global)
-    shadow("snowbird".versioned)
-    shadow("cascade".versioned)
-    shadow("updater".versioned)
+    shadow(libs.kommand)
+    shadow(libs.kbus)
+    shadow(libs.snowbird.find())
+    shadow(libs.cascade.find())
+    shadow(libs.updater.find())
 }
 
 loom {
     fabricModJsonPath = rootProject.file("src/main/resources/fabric.mod.json")
-    accessWidenerPath = rootProject.file("src/main/resources/$modId.accesswidener")
+    accessWidenerPath = rootProject.file("src/main/resources/${mod("id")}.accesswidener")
 
     runConfigs.named("client") {
         generateRunConfig = true
-        jvmArguments.addAll(
-            "-Ddevauth.enabled=true",
-            "-Ddevauth.account=main",
-            "-XX:+AllowEnhancedClassRedefinition",
-            "-XX:+IgnoreUnrecognizedVMOptions",
-        )
+        jvmArguments.addAll("-Ddevauth.enabled=true", "-Ddevauth.account=main", "-XX:+AllowEnhancedClassRedefinition", "-XX:+IgnoreUnrecognizedVMOptions")
     }
 
     runConfigs.named("server") {
@@ -54,29 +49,17 @@ loom {
     }
 }
 
-tasks.withType<JavaCompile>().configureEach {
-    options.release.set(25)
-}
-
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(25)
     withSourcesJar()
 }
 
 kotlin {
     jvmToolchain(25)
-
-    compilerOptions {
-        jvmTarget.set(JvmTarget.valueOf("JVM_25"))
-
-        freeCompilerArgs.addAll("-Xcontext-sensitive-resolution", "-Xcollection-literals", "-Xskip-prerelease-check")
-        optIn.add("kotlin.time.ExperimentalTime")
-    }
 }
 
 publishing {
     repositories {
-        val a = if (Regex("-b[0-9]*$") in modVer) "snapshots" else "releases"
+        val a = if (Regex("-b[0-9]*$") in mod("version")) "snapshots" else "releases"
         maven("https://maven.starred.foo/$a") {
             name = "starred"
             credentials {
@@ -88,9 +71,9 @@ publishing {
 
     publications {
         create<MavenPublication>("maven") {
-            groupId = "foo.starred"
-            artifactId = modId
-            version = "$modVer+$ver"
+            groupId = mod("group")
+            artifactId = mod("id")
+            version = "${mod("version")}+$minecraft"
             from(components["java"])
         }
     }
@@ -98,7 +81,7 @@ publishing {
 
 tasks {
     processResources {
-        val r = mapOf("id" to modId, "name" to modName, "version" to modVer, "minecraft" to project.property("mod.mc_dep"), "accessWidener" to "$modId.accesswidener")
+        val r = mapOf("id" to mod("id"), "name" to mod("name"), "version" to mod("version"), "minecraft" to lib("compatibility"), "tweaker" to mod("tweaker"))
 
         inputs.properties(r)
         filesMatching("fabric.mod.json") { expand(r) }
@@ -108,20 +91,26 @@ tasks {
         description = "Builds and collects mod jars."
         group = "build"
         from(jar, kotlinSourcesJar)
-        into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
+        into(rootProject.layout.buildDirectory.file("libs/${mod("version")}"))
         dependsOn("build")
     }
 }
-
-val String.global: Provider<MinimalExternalModuleDependency>
-    get() = extensions.getByType<VersionCatalogsExtension>().named("libs").findLibrary(this).get()
-
-val String.versioned: Provider<MinimalExternalModuleDependency>
-    get() = extensions.getByType<VersionCatalogsExtension>().named("libs").findLibrary("$this-${ver.replace(".", "_")}").get()
 
 fun DependencyHandlerScope.shadow(dep: Any, config: ExternalModuleDependency.() -> Unit = {}) {
     val d = create((dep as? Provider<*>)?.get() ?: dep) as ExternalModuleDependency
     d.config()
     include(d)
     implementation(d)
+}
+
+fun Provider<MinimalExternalModuleDependency>.find(): String {
+    return "${get()}+$minecraft"
+}
+
+operator fun VersionCatalog.get(name: String): Provider<MinimalExternalModuleDependency> {
+    return findLibrary(name).get()
+}
+
+operator fun VersionCatalog.invoke(name: String): String {
+    return findVersion(name).get().requiredVersion
 }

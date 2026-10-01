@@ -1,0 +1,6 @@
+[versions]
+id = "template"
+name = "Template"
+version = "0.0.1"
+group = "foo.starred"
+tweaker = "template.accesswidener"
