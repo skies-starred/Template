@@ -9,8 +9,10 @@ fabric-language-kotlin = "1.13.13+kotlin.2.4.10"
 
 kbus = "2026.09.3"
 kommand = "2026.09.2"
+klassgraph = "2026.10.1"
 snowbird = "2026.09.4"
-cascade = "2026.09.7"
+cascade = "2026.10.1"
+parallax = "2026.10.1"
 updater = "2026.09.2"
 
 [libraries]
@@ -21,7 +23,9 @@ devauth = { module = "me.djtheredstoner:DevAuth-fabric", version.ref = "devauth"
 
 kbus = { module = "foo.starred:kbus", version.ref = "kbus" }
 kommand = { module = "foo.starred:kommand", version.ref = "kommand" }
+klassgraph = { module = "foo.starred:klassgraph", version.ref = "klassgraph" }
 cascade = { module = "foo.starred:cascade", version.ref = "cascade" }
+parallax = { module = "foo.starred:parallax", version.ref = "parallax" }
 snowbird = { module = "foo.starred:snowbird", version.ref = "snowbird" }
 updater = { module = "foo.starred:updater", version.ref = "updater" }
 

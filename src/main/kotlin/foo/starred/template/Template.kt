@@ -2,6 +2,7 @@
 
 package foo.starred.template
 
+import foo.starred.kbus.impl.KBus
 import net.fabricmc.api.ClientModInitializer
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -9,6 +10,9 @@ import org.slf4j.LoggerFactory
 object Template : ClientModInitializer {
     @JvmField
     val LOGGER: Logger = LoggerFactory.getLogger(Data.name)
+
+    @JvmField
+    val BUS: KBus = KBus()
 
     override fun onInitializeClient() {
         LOGGER.info("Template mod initialised.")

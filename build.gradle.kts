@@ -28,10 +28,12 @@ dependencies {
     implementation(libs.fabric.loader)
     implementation(libs.fabric.language.kotlin)
 
-    shadow(libs.kommand)
     shadow(libs.kbus)
+    shadow(libs.kommand)
+    shadow(libs.klassgraph)
     shadow(libs.snowbird.find())
     shadow(libs.cascade.find())
+    shadow(libs.parallax.find())
     shadow(libs.updater.find())
 }
 
